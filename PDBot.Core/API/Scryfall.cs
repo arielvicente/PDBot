@@ -48,7 +48,9 @@ namespace PDBot.Core.API
                 return Cache[name];
             }
 
-            var address = $"/cards/search?q={name}+lang:en&include_multilingual=true";
+            var query = $"{name} lang:en";
+            var encodedQuery = Uri.EscapeDataString(query);
+            var address = $"/cards/search?q={encodedQuery}&include_multilingual=true";
             var cards = HitMultiCardAPI(address).ToArray();
             var card = cards.FirstOrDefault(c => c.Names.Contains(name));
             return card;
