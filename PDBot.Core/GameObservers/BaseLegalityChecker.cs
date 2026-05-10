@@ -127,18 +127,18 @@ namespace PDBot.Core.GameObservers
                 {
                     case "transform":
                     case "flip":
-                        face = json["card_faces"].First(f => f.Value<string>(nameof(name)) == name) as JObject;
+                        face = json["card_faces"].First(jToken => jToken.Value<string>("name") == name) as JObject;
                         IsTransform = !face.TryGetValue("mana_cost", out var cost) || string.IsNullOrEmpty(face.Value<string>("mana_cost"));
                         break;
                     case "modal_dfc":
-                        IsTransform = json["card_faces"].First().Value<string>(nameof(name)) != name;
+                        IsTransform = json["card_faces"].First().Value<string>("name") != name;
                         break;
                     case "meld":
                         face = json;
                         IsTransform = !face.TryGetValue("mana_cost", out cost) || string.IsNullOrEmpty(face.Value<string>("mana_cost"));
                         break;
                     case "adventure":
-                        face = json["card_faces"].First(f => f.Value<string>(nameof(name)) == name) as JObject;
+                        face = json["card_faces"].First(jToken => jToken.Value<string>("name") == name) as JObject;
                         string typeline = face.Value<string>("type_line");
                         IsTransform = typeline.Contains("Adventure") || typeline.Contains("Omen");
                         break;
