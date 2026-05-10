@@ -53,6 +53,14 @@ namespace Tests
             ClassicAssert.IsFalse(BaseLegalityChecker.IsRearFace("Purging Stormbrood"));
             ClassicAssert.IsTrue(BaseLegalityChecker.IsRearFace("Absorb Essence"));
         }
+        
+        [Test]
+        public void TestPrepared()
+        {
+            // This test case only covers prepared cards that are not other literal cards (like Brainstorm, Regrowth, etc.)
+            ClassicAssert.IsFalse(BaseLegalityChecker.IsRearFace("Vastlands Scavenger"));
+            ClassicAssert.IsTrue(BaseLegalityChecker.IsRearFace("Bind to Life"));
+        }
 
         [Test]
         public void TestSpiderman()
